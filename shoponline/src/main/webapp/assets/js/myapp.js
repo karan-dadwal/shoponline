@@ -1,6 +1,6 @@
 $(function() {
 
-	// fixing menu select problem 
+	// fixing menu select problem
 	switch (menu) {
 
 	case 'Contact Us':
@@ -10,9 +10,13 @@ $(function() {
 	case 'About Us':
 		$('#about').addClass('active');
 		break;
-
+	case 'All Products':
+		$('#listProducts').addClass('active');
+		break;
 	default:
-		$('#home').addClass('active');
+		$('#listProducts').addClass('active');
+		$('#a_' + menu).addClass('active');
+
 		break;
 	}
 
