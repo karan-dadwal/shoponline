@@ -21,7 +21,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	
 	public List<Category> listCategory() {
 		String getList = "FROM Category WHERE active = :active";
-		Query query = sessionFactory.getCurrentSession().createQuery(getList);
+		Query query = sessionFactory.getCurrentSession().createQuery(getList,Category.class);
 		query.setParameter("active", true);
 		return query.getResultList();
 	}
