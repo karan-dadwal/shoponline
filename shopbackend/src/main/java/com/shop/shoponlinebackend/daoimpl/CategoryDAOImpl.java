@@ -1,47 +1,78 @@
 package com.shop.shoponlinebackend.daoimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.shoponlinebackend.dao.CategoryDAO;
 import com.shop.shoponlinebackend.dto.Category;
 
 @Repository("categoryDAO")
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO {
 
-	private static List<Category> list = new ArrayList<Category>();
-	static {
-		Category cat = new Category();
-		cat.setId(1);
-		cat.setName("Fashion");
-		cat.setDescription("fashion and accessories");
-		cat.setImageUrl("abc.png");
-		list.add(cat);
-		cat = new Category();
-		cat.setId(2);
-		cat.setName("Electronics");
-		cat.setDescription("mobiles, tv");
-		cat.setImageUrl("abc2.png");
-		list.add(cat);
-	}
+	@Autowired
+	private SessionFactory sessionFactory;
 
+	
 	public List<Category> listCategory() {
-		// TODO Auto-generated method stub
-
-		return list;
+		String getList = "FROM Category WHERE active = :active";
+		Query query = sessionFactory.getCurrentSession().createQuery(getList);
+		query.setParameter("active", true);
+		return query.getResultList();
 	}
 
 	@Override
 	public Category getCategoryById(int id) {
-		// TODO Auto-generated method stub
+		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
 
-		for (Category category : list) {
-			if (category.getId() == id)
-				return category;
-		}
-		return null;
 	}
 
+	@Override
+	
+	public Boolean addCategory(Category category) {
+
+		try {
+
+			sessionFactory.getCurrentSession().persist(category);
+			return true;
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+			return false;
+		}
+
+	}
+
+	@Override
+	public Boolean updateCategory(Category category) {
+
+		try {
+
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean deleteCategory(Category category) {
+		category.setActive(false);
+		try {
+
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+			return false;
+		}
+	}
 }
