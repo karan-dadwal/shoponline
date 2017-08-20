@@ -32,7 +32,7 @@ public class Product {
 	@Column(name="supplier_id")
 	private int supplierId;
 	private int purchases;
-	private int views;
+	private int view;
 	
 	
 	
@@ -107,10 +107,10 @@ public class Product {
 		this.purchases = purchases;
 	}
 	public int getViews() {
-		return views;
+		return view;
 	}
 	public void setViews(int views) {
-		this.views = views;
+		this.view = views;
 	}
 	
 	

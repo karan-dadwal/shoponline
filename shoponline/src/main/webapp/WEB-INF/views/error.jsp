@@ -3,9 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<spring:url var="js" value="/resources/js" />
 <spring:url var="css" value="/resources/css" />
-<spring:url var="images" value="/resources/images" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,8 +19,6 @@
 
 <!-- fixing menu select problem  -->
 <script>
-	menu = '${title}';
-	
 	contextRoot = '${contextRoot}';
 </script>
 <!-- Bootstrap core CSS -->
@@ -40,46 +36,43 @@
 
 <body>
 
-	
+
 	<div class="wrapper">
 		<!-- Including navbar -->
-		<%@include file="./shared/navbar.jsp"%>
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+					</button>
+					<a class="navbar-brand" href="${contextRoot}/home">Online
+						Shopping</a>
+				</div>
+			</div>
+		</nav>
 
 
 		<!-- Page Content -->
 		<div class="content">
-			<c:if test="${clickHome == true}">
-				<%@include file="home.jsp"%>
+			<div class="container">
+				<div class="container">
+					<div class="col-xs-12">
 
-			</c:if>
+						<div class="jumbotron">
+							<h1>${errorTitle}</h1>
+							<hr>
+							<blockquote style="word-wrap:break-word">${errorDesc}</blockquote>
 
-
-			<c:if test="${clickAbout == true}">
-				<%@include file="about.jsp"%>
-
-			</c:if>
-
-
-			<c:if test="${clickContact == true}">
-				<%@include file="contact.jsp"%>
-
-			</c:if>
-			
-			<c:if test="${clickAllProducts == true or clickCategoryProducts == true}">
-				<%@include file="listproducts.jsp"%>
-
-			</c:if>
-			
-
-			<c:if test="${clickProduct == true}">
-				<%@include file="product.jsp"%>
-
-			</c:if>
-
-
-			
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	
+
 		<!-- Including footer -->
 
 		<%@include file="./shared/footer.jsp"%>
@@ -89,14 +82,14 @@
 		<script src="${js}/popper.js"></script>
 
 		<script src="${js}/bootstrap.min.js"></script>
-		
-		
+
+
 		<!-- for jquery datatables -->
 		<script src="${js}/jquery.dataTables.js"></script>
-		
+
 		<script src="${js}/dataTables.bootstrap.js"></script>
-		
-		
+
+
 		<script src="${js}/myapp.js"></script>
 	</div>
 </body>
