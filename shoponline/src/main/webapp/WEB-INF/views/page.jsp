@@ -75,6 +75,10 @@
 				<%@include file="product.jsp"%>
 
 			</c:if>
+			<c:if test="${clickManageProducts == true}">
+				<%@include file="manageProducts.jsp"%>
+
+			</c:if>
 
 
 			

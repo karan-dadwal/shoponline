@@ -13,6 +13,10 @@ $(function() {
 	case 'All Products':
 		$('#listProducts').addClass('active');
 		break;
+	case 'Manage Products':
+		$('#manageProducts').addClass('active');
+		break;
+		
 	case 'Home':
 		$('#home').addClass('active');
 		break;
@@ -113,5 +117,13 @@ $(function() {
 
 					]
 				});
+	}
+	
+	var $alert = $('.alert');
+	if($alert.length)
+	{
+		setTimeout(function(){
+			$alert.fadeOut('slow');
+		}, 3000);
 	}
 });
